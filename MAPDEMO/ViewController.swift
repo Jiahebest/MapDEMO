@@ -14,13 +14,26 @@ class ViewController: UIViewController,MKMapViewDelegate {
         super.viewDidLoad()
         let mapView = MKMapView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
         mapView.mapType = .standard
-        mapView.region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(23.16,113.23), span: MKCoordinateSpanMake(1,1))
-        let pn = MKPointAnnotation()
-        pn.coordinate = CLLocationCoordinate2DMake(23.16, 113.23)
-        pn.title = "GuangZhou"
-        pn.subtitle = "GuangDong,China"
-        mapView.addAnnotation(pn)
+        //mapView.region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(23.16,113.23), span: MKCoordinateSpanMake(1,1))
+        //let pn = MKPointAnnotation()
+        //pn.coordinate = CLLocationCoordinate2DMake(23.16, 113.23)
+        //pn.title = "GuangZhou"
+        //pn.subtitle = "GuangDong,China"
+        //mapView.addAnnotation(pn)
         self.view.addSubview(mapView)
+        
+        //set destination
+        let fromcoor = CLLocationCoordinate2DMake(39.26, 116.3)
+        let fromPlace = MKPlacemark(coordinate: fromcoor)
+        let fromItem = MKMapItem(placemark: fromPlace)
+        
+        let tocoor = CLLocationCoordinate2DMake(23.16, 113.23)
+        let toPlace = MKPlacemark(coordinate: tocoor)
+        let toItem = MKMapItem(placemark: toPlace)
+        
+        let request = MKDirectionsRequest()
+        request.source = fromItem
+        request.destination = toItem
     }
 
     public func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
